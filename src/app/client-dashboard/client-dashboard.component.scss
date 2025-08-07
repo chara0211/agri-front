@@ -1,0 +1,20 @@
+
+.navbar {
+    background-color: #dab03b;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+  }
+  
+  .navbar h1 {
+    font-size: 26px;
+    font-weight: 600;
+  }
+  
+  .navbar p {
+    font-size: 16px;
+    color: #eaeaea;
+    font-weight: 400;
+  }

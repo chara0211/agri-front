@@ -1,0 +1,96 @@
+<div class="signup-wrapper">
+  <div class="signup-container">
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <div class="logo">
+        <img src="assets/logo1.png" alt="Agrilink Logo" />
+      </div>
+      <h1>Welcome to Agrilink</h1>
+      <p>Agrilink connects farmers, clients, and administrators, offering innovative tools to manage agricultural activities and foster collaboration.</p>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <h2>Sign Up</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name"><i class="fas fa-user"></i> Name</label>
+          <input id="name" formControlName="name" placeholder="Enter your name" />
+          <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid">
+            <small>Name is required and must have a maximum of 255 characters.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email</label>
+          <input id="email" formControlName="email" placeholder="Enter your email" />
+          <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
+            <small>Email is required and must be valid.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password"><i class="fas fa-lock"></i> Password</label>
+          <div class="password-container">
+            <input 
+              id="password" 
+              [type]="passwordVisible ? 'text' : 'password'" 
+              formControlName="password" 
+              placeholder="Enter a password" />
+            <i 
+              class="fas" 
+              [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" 
+              (click)="togglePasswordVisibility()"></i>
+          </div>
+          <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+            <small>Password is required and must be at least 4 characters long.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password_confirmation"><i class="fas fa-key"></i> Confirm Password</label>
+          <div class="password-container">
+            <input 
+              id="password_confirmation" 
+              [type]="confirmPasswordVisible ? 'text' : 'password'" 
+              formControlName="password_confirmation" 
+              placeholder="Confirm your password" />
+            <i 
+              class="fas" 
+              [ngClass]="confirmPasswordVisible ? 'fa-eye-slash' : 'fa-eye'" 
+              (click)="toggleConfirmPasswordVisibility()"></i>
+          </div>
+          <div *ngIf="signupForm.get('password_confirmation')?.touched && signupForm.get('password_confirmation')?.invalid">
+            <small>Password confirmation is required.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="role"><i class="fas fa-user-tag"></i> Role</label>
+          <select id="role" formControlName="role">
+            <option value="admin">Administrator</option>
+            <option value="farmer">Farmer</option>
+            <option value="client">Client</option>
+          </select>
+        </div>
+
+        <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+
+        <div class="social-signup">
+          <p>Or sign up with:</p>
+          <div class="social-icons">
+            <i class="fab fa-google"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+          </div>
+        </div>
+
+        <p class="login-link">
+          Already have an account? <a href="/login">Log in here</a>.
+        </p>
+
+        <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+      </form>
+    </div>
+  </div>
+</div>

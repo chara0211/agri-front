@@ -1,0 +1,210 @@
+<app-farmer-sidebar></app-farmer-sidebar>
+<div class="dashboard-container">
+  <section class="overview">
+    <div class="navbar">
+      <h1>Welcome, {{ userName }}!</h1>
+      <p> manage your products, track your sales, and stay on top of your business activities.</p>
+    </div>
+    <h2>Dashboard Overview</h2>
+<div class="overview-stats">
+  <div class="stat-item">
+    <i class="fas fa-chart-line"></i>
+    <h3>Total Sales</h3>
+    <!-- Remove the currency pipe -->
+    <p>{{ totalSales }}</p>
+  </div>
+  <div class="stat-item">
+    <i class="fas fa-shopping-cart"></i>
+    <h3>Total Orders</h3>
+    <p>{{ totalOrders }}</p>
+  </div>
+  <div class="stat-item">
+    <i class="fas fa-dollar-sign"></i>
+    <h3>Total Revenue</h3>
+    <!-- Remove the currency pipe -->
+    <p>{{ totalRevenue | currency }}</p> <!-- Currency formatting for totalRevenue -->
+  </div>
+  <div class="stat-item">
+    <i class="fas fa-boxes"></i>
+    <h3>Total Products</h3>
+    <p>{{ totalProducts }}</p>
+  </div>
+</div>
+
+  </section>
+
+  <section class="product-management">
+    <h2>Manage Products</h2>
+    <div class="actions">
+      <!-- Add Product Button -->
+      <button (click)="openAddProductModal()">
+        <i class="fas fa-plus-circle"></i> Add Product
+      </button>
+      <!-- Search Bar -->
+       
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i> <!-- FontAwesome search icon -->
+
+
+        <input 
+          type="text" 
+          placeholder="Search products..." 
+          [(ngModel)]="searchTerm" 
+          (input)="filterProducts()"
+          class="search-bar"
+        />
+      </div>
+      
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Status</th>
+          <th>Sales</th>
+          <th>Revenue</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of filteredProducts">
+          <td>{{ product.name }}</td>
+          <td>
+            <span 
+              class="status-badge" 
+              [ngClass]="{
+                'available': product.status === 'Available',
+                'low-stock': product.status === 'Low Stock',
+                'out-of-stock': product.status === 'Out of Stock'
+              }">
+              {{ product.status }}
+            </span>
+          </td>
+          
+          <td>{{ product.sales }}</td>
+          <td>{{ product.revenue | currency }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>{{ product.stock }}</td>
+          <td>{{ product.description }}</td>
+          <td>
+            <img *ngIf="product.image" [src]="'http://localhost:8000/storage/' + product.image" alt="Product Image" width="50">
+            <span *ngIf="!product.image">No Image</span>
+          </td>
+          <td>
+            <button class="edit-btn" (click)="openEditProductModal(product)"><i class="fas fa-edit"></i></button>
+            <button class="delete-btn" (click)="deleteProduct(product)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <!-- Header with Icon -->
+      <div class="modal-header">
+        <i class="fas fa-box"></i> Add New Product
+        <button (click)="closeAddProductModal()" style="background: none; border: none; font-size: 20px; color: white; cursor: pointer;">
+          &times;
+        </button>
+      </div>
+  
+      <!-- Body: Form and Image Preview -->
+      <div class="modal-body">
+        <div class="modal-body-wrapper">
+          <!-- Form Section -->
+          <div class="modal-left">
+            <label for="name">Product Name</label>
+            <input type="text" id="name" [(ngModel)]="newProduct.name" name="name" required>
+            
+            <label for="sales">Sales</label>
+            <input type="number" id="sales" [(ngModel)]="newProduct.sales" name="sales" required>
+            
+            <label for="price">Price</label>
+            <input type="number" id="price" [(ngModel)]="newProduct.price" name="price" required>
+            
+            <label for="stock">Stock</label>
+            <input type="number" id="stock" [(ngModel)]="newProduct.stock" name="stock" required>
+            <label for="status">Status</label>
+            <select id="status" [(ngModel)]="newProduct.status">
+              <option value="Available">Available</option>
+              <option value="Low Stock">Low Stock</option>
+              <option value="Out of Stock">Out of Stock</option>
+            </select>
+
+            
+            <label for="description">Description</label>
+            <textarea id="description" [(ngModel)]="newProduct.description" name="description" required></textarea>
+            
+            <label for="image">Image</label>
+            <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*">
+          </div>
+  
+          <!-- Image Preview -->
+          <div class="modal-right">
+            <img *ngIf="newProduct.image" [src]="newProduct.image" alt="Product Preview">
+            <span *ngIf="!newProduct.image" style="color: #888;">No Image Selected</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Footer Buttons -->
+      <div class="modal-footer">
+        <button class="cancel-btn" type="button" (click)="closeAddProductModal()">Cancel</button>
+        <button class="save-btn" type="submit" (click)="addProduct()">Save</button>
+      </div>
+    </div>
+  </div>
+   <!-- Edit Product Modal -->
+   <div class="modal" *ngIf="isEditModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fas fa-edit"></i> Edit Product
+        <button (click)="closeEditProductModal()" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-left">
+          <label for="name">Product Name</label>
+          <input type="text" id="name" [(ngModel)]="selectedProduct.name" name="name" required>
+          
+          <label for="sales">Sales</label>
+          <input type="number" id="sales" [(ngModel)]="selectedProduct.sales" name="sales" required>
+          
+          <label for="price">Price</label>
+          <input type="number" id="price" [(ngModel)]="selectedProduct.price" name="price" required>
+          
+          <label for="stock">Stock</label>
+          <input type="number" id="stock" [(ngModel)]="selectedProduct.stock" name="stock" required>
+          <label for="status">Status</label>
+          <select id="status" [(ngModel)]="selectedProduct.status">
+            <option value="Available">Available</option>
+            <option value="Low Stock">Low Stock</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
+
+          
+          <label for="description">Description</label>
+          <textarea id="description" [(ngModel)]="selectedProduct.description" name="description" required></textarea>
+          
+          <label for="image">Image</label>
+          <input type="file" id="image" (change)="onFileSelectedForEdit($event)" accept="image/*">
+        </div>
+        <div class="modal-right">
+          <img *ngIf="selectedProduct.image" [src]="selectedProduct.image" alt="Product Preview">
+          <span *ngIf="!selectedProduct.image">No Image Selected</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeEditProductModal()">Cancel</button>
+        <button class="save-btn" (click)="saveEditedProduct()">Save</button>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>

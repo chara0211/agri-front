@@ -1,0 +1,70 @@
+<app-farmer-sidebar></app-farmer-sidebar>
+
+<div *ngIf="regularOrders.length > 0; else noOrders">
+  <div class="table-wrapper">
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th><i class="fas fa-cogs"></i> Order ID</th>
+          <th><i class="fas fa-user"></i> Client</th>
+          <th><i class="fas fa-dollar-sign"></i> Total Amount</th>
+          <th><i class="fas fa-tasks"></i> Status</th>
+          <th><i class="fas fa-calendar-check"></i> Frequency</th>
+          <th><i class="fas fa-calendar-day"></i> Interval</th>
+          <th><i class="fas fa-boxes"></i> Products</th>
+          <th><i class="fas fa-cogs"></i> Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of regularOrders" [ngClass]="{'vip-client': order.user.isVip}">
+          <td>{{ order.id }}</td>
+          
+          <!-- Client info with VIP star -->
+          <td>
+            <div class="client-info">
+              <strong>{{ order.user.name }}</strong>
+              <div class="vip-badge" *ngIf="order.user.isVip">
+                <i class="fas fa-crown"></i> VIP
+              </div>
+              <i class="vip-star">&#9733;</i> <!-- VIP Star -->
+            </div>
+          </td>
+          
+          <td>{{ order.total_amount }}$</td>
+          <td>
+            <span class="status-badge" [ngClass]="order.status">
+              <i class="fas fa-circle" [ngClass]="order.status"></i> {{ order.status }}
+            </span>
+          </td>
+          <td>{{ order.regularity_type || 'Not specified' }}</td>
+          <td>{{ order.interval ? order.interval + ' days' : 'Not specified' }}</td>
+          
+          <!-- Display products in this order -->
+          <td>
+            <ul class="product-list">
+              <li *ngFor="let item of order.order_items">
+                <i class="fas fa-cube"></i> <strong>{{ item.product.name }}</strong> - Quantity: {{ item.quantity }}
+              </li>
+            </ul>
+          </td>
+          
+          <!-- Action buttons -->
+          <td>
+            <button *ngIf="order.status !== 'completed'" (click)="validateOrder(order.id)" class="btn-validate">
+              <i class="fas fa-check-circle"></i> Validate
+            </button>
+            <span *ngIf="order.status === 'completed'" class="validated-order-badge">
+              <i class="fas fa-check-double"></i> Validated
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noOrders>
+  <div class="empty-state">
+    <p><i class="fas fa-exclamation-triangle"></i> No regular orders found for this farmer.</p>
+  </div>
+</ng-template>

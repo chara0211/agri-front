@@ -1,0 +1,72 @@
+<app-client-sidebar></app-client-sidebar>
+
+<!-- Barre de recherche -->
+<div class="search-bar">
+
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Search by username..."
+    class="search-input"
+    
+  />
+
+</div>
+
+<div class="post-list-container">
+  <div *ngIf="filteredPosts.length === 0">No posts found.</div>
+  <div *ngFor="let post of filteredPosts" class="post-item">
+    <div class="user-profile-container">
+      <div class="user-profile">
+        <div class="profile-circle">
+          <img src="assets/OIP.jpeg" alt="User Profile">
+        </div>
+      </div>
+      <a [routerLink]="['/user-products', post.farmer_id]" class="user-link">
+        <span class="user-name">{{ post.userName }}</span>
+        <span class="see-products">See his Products</span>
+      </a>
+    </div>
+
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.content }}</p>
+
+    <p><strong>Posted on :</strong> {{ post.createdAt }}</p>
+
+    <!-- Affichage de l'image du post -->
+    <img
+      *ngIf="post.image"
+      [src]="getImageUrl(post.image)"
+      alt="Image du post"
+      class="post-image"
+    />
+
+    <!-- Section des commentaires -->
+    <div class="comment-toggle" (click)="toggleComments(post)">
+      <i class="fa" [ngClass]="post.showComments ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      <span>{{ post.showComments ? 'Hide' : 'See' }} comments</span>
+    </div>
+
+    <!-- Commentaires (avec effet de déploiement) -->
+    <div *ngIf="post.showComments">
+      <div class="comment-list">
+        <div *ngFor="let comment of post.comments" class="comment-item">
+          <p><strong>{{ comment.userName }}:</strong> {{ comment.content }}</p>
+        </div>
+      </div>
+
+      <!-- Ajouter un commentaire -->
+      <div class="add-comment">
+        <input
+          type="text"
+          [(ngModel)]="post.newCommentContent"
+          placeholder="Add a comment..."
+          aria-label="Add a comment"
+        />
+        <button (click)="addComment(post)" title="Envoyer le commentaire">
+          <i class="fa fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

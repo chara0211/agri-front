@@ -1,0 +1,80 @@
+$primary-green: #1d4b0b;
+$light-green: #44aa00;
+$gold: #b17808;
+$lime: #a0d468;
+
+.notifications-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.notification-card {
+  flex: 1 1 calc(33.333% - 20px); // Three cards per row with spacing
+  max-width: 300px;
+  border: 2px solid $light-green;
+  border-radius: 10px;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #fff, #f9fff5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .notification-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $primary-green;
+
+    i {
+      font-size: 1.8rem;
+      color: $gold;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: $primary-green;
+    margin: 5px 0;
+
+    strong {
+      color: $gold;
+    }
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 12px 15px;
+    background-color: $lime;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: $light-green;
+      transform: scale(1.05);
+    }
+
+    i {
+      font-size: 1.2rem;
+    }
+  }
+}

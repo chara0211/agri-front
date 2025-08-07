@@ -1,0 +1,20 @@
+<div class="notifications-container">
+  <div *ngFor="let notification of notifications" class="notification-card">
+    <div class="notification-header">
+      <i class="icon fas fa-bell"></i>
+      <h3>New order from {{ notification.data.user_name }}</h3>
+    </div>
+    <div class="notification-details">
+      <p><i class="fas fa-receipt"></i> <strong>Order ID:</strong> {{ notification.data.order_id }}</p>
+      <p><i class="fas fa-money-bill"></i> <strong>Total amount:</strong> {{ notification.data.total_amount | currency }}</p>
+      <p><i class="fas fa-calendar-alt"></i> <strong>Created on:</strong> {{ notification.created_at | date:'long' }}</p>
+    </div>
+    <button
+      *ngIf="!notification.read_at"
+      class="mark-as-read-btn"
+      (click)="markAsRead(notification.id)"
+    >
+      <i class="fas fa-check-circle"></i>Mark as read
+    </button>
+  </div>
+</div>

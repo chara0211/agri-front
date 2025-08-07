@@ -1,0 +1,324 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+  }
+  
+  .overview-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .stat-item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-item i {
+    font-size: 24px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker backdrop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 10px; /* For smaller screens */
+    overflow: auto; /* Allow scrolling if necessary */
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px; /* Ensures the modal isn't too large */
+    max-height: 90vh; /* Limits height to fit within the viewport */
+    overflow: hidden; /* Hides excess content */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .modal-header {
+    background: linear-gradient(135deg, #4CAF50, #81C784);
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .modal-header i {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    overflow-y: auto; /* Scrollable content */
+  }
+  
+  .modal-body-wrapper {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .modal-left,
+  .modal-right {
+    flex: 1;
+  }
+  
+  .modal-left label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .modal-left input,
+  .modal-left textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .modal-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+    margin-top: 20px;
+    height: 350px;
+  }
+  
+  .modal-right img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .modal-footer {
+    padding: 15px;
+    text-align: right;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .modal-footer button {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s ease;
+  }
+  
+  .modal-footer button.save-btn {
+    background: linear-gradient(135deg, #4CAF50, #81C784);
+    color: white;
+  }
+  
+  .modal-footer button.save-btn:hover {
+    background: linear-gradient(135deg, #388E3C, #66BB6A);
+    transform: scale(1.05);
+  }
+  
+  .modal-footer button.cancel-btn {
+    background: #f44336;
+    color: white;
+  }
+  
+  .modal-footer button.cancel-btn:hover {
+    background: #d32f2f;
+    transform: scale(1.05);
+  }
+  .modal-left select option[value="Available"] {
+    background-color: #81C784; /* Light green */
+    color: #fff;
+  }
+  
+  .modal-left select option[value="Low Stock"] {
+    background-color: #FFEB3B; /* Light yellow */
+    color: #555;
+  }
+  
+  .modal-left select option[value="Out of Stock"] {
+    background-color: #F44336; /* Red */
+    color: #fff;
+  }
+  
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  
+  
+.product-management, .order-management, .vip-customers, .notifications {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  table tr:hover {
+    background-color: #ddd;
+  }
+  
+  table img {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 155px;
+    color: #888; /* Optional: change icon color */
+  }
+  
+  .search-bar {
+    padding-left: 30px; /* Add space for the icon */
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  
+  .status-badge {
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .available {
+    background-color: green;
+  }
+  
+  .low-stock {
+    background-color: orange;
+  }
+  
+  .out-of-stock {
+    background-color: red;
+  }
+  .navbar {
+    background-color: #dab03b;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+  
+  }
+  
+  .navbar h1 {
+    font-size: 26px;
+    font-weight: 600;
+  }
+  
+  .navbar p {
+    font-size: 20px;
+    color: #eaeaea;
+    font-weight: 410;
+  }
+  

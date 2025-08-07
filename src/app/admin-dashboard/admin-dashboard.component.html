@@ -1,0 +1,138 @@
+<app-admin-sidebar></app-admin-sidebar>
+<div class="admin-container">
+  <div class="main-content">
+    <div class="navbar">
+      <h1>Welcome, {{ userName }}!</h1>
+      <p>Manage platform users, content, reports, and more.</p>
+    </div>
+
+    <div class="overview">
+      <div class="stat-card">
+        <i class="fas fa-users"></i> <!-- Icon for Total Users -->
+        <h2>Total Users</h2>
+        <p>{{ totalUsers }}</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-user-tie"></i> <!-- Icon for Total Farmers -->
+        <h2>Total Farmers</h2>
+        <p>{{ totalFarmers }}</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-user"></i> <!-- Icon for Total Clients -->
+        <h2>Total Clients</h2>
+        <p>{{ totalClients }}</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-user-shield"></i> <!-- Icon for Total Admins -->
+        <h2>Total Admins</h2>
+        <p>{{ totalAdmins }}</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-clipboard-list"></i> <!-- Icon for Total Posts -->
+        <h2>Total Posts</h2>
+        <p>{{ totalPosts }}</p>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search users or posts..."
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+      />
+      <select [(ngModel)]="selectedUserRole" (change)="onSearch()">
+        <option value="">All Roles</option>
+        <option value="farmer">Farmer</option>
+        <option value="client">Client</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+    <div class="content-row">
+      <div class="table-section">
+        <h3>User Management</h3>
+        <table *ngIf="filteredUsers.length > 0" class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of paginatedUsers">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+              <td>
+                <button (click)="deleteUser(user.id)">
+                  <i class="fas fa-trash-alt"></i> 
+                </button>
+                <button (click)="viewAllPosts(user.id)">
+                  <i class="fas fa-eye"></i> 
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+       <!-- Pagination Controls -->
+       <div class="pagination">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">
+          <i class="fas fa-chevron-left"></i> Prev
+        </button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      
+        <p *ngIf="filteredUsers.length === 0">No users available.</p>
+        
+      </div>
+
+      <div class="chart-section">
+        <h3 class="chart-title">Farmer Sales and Revenue</h3>
+        <div class="chart-container">
+          <canvas id="farmerChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Modal -->
+<!-- Carousel Modal -->
+<div class="carousel-modal" *ngIf="showModal">
+  <div class="carousel-modal-content">
+    <button class="close-btn" (click)="closeModal()">X</button>
+    <div class="carousel-container">
+      <button class="carousel-button prev" (click)="prevPost()">&#10094;</button>
+
+      <div class="carousel-posts">
+        <div *ngFor="let post of filteredPosts; let i = index" class="carousel-post" [class.active]="i === currentPostIndex">
+          <!-- Username at the top -->
+          <div class="post-user">
+            <span>Posted by: {{ post.userName }}</span>
+          </div>
+          <img *ngIf="post.image" [src]="getImageUrl(post.image)" alt="Post Image" class="post-image" />
+          <h4 class="post-title">{{ post.title }}</h4>
+          <p class="post-content">{{ post.content }}</p>
+          <p>Created at: {{ post.created_at }}</p>
+          <p>Updated at: {{ post.updated_at }}</p>
+          <button (click)="deletePost(post.id)" class="delete-btn">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
+        </div>
+      </div>
+
+      <button class="carousel-button next" (click)="nextPost()">&#10095;</button>
+    </div>
+  </div>
+</div>
+
+
+
+  </div>
+</div>

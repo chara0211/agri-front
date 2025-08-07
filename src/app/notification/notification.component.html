@@ -1,0 +1,22 @@
+<app-admin-sidebar></app-admin-sidebar>
+
+<div class="notifications-container">
+  <div *ngFor="let notification of notifications" class="notification-card">
+    <div class="notification-header">
+      <i class="fas fa-user-plus icon"></i>
+      <h3>New registration: {{ notification.data.name }}</h3>
+    </div>
+    <div class="notification-details">
+      <p><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ notification.data.email }}</p>
+      <p><i class="fas fa-user-tag"></i> <strong>Role:</strong> {{ notification.data.role }}</p>
+      <p><i class="fas fa-calendar-alt"></i> <strong>Created on:</strong> {{ notification.created_at | date:'long' }}</p>
+    </div>
+    <button
+      *ngIf="!notification.read_at"
+      class="mark-as-read-btn"
+      (click)="markAsRead(notification.id)"
+    >
+      <i class="fas fa-check-circle"></i> Mark as read
+    </button>
+  </div>
+</div>

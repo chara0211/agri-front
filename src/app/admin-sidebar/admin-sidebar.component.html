@@ -1,0 +1,42 @@
+<header class="header">
+    <div class="logo">
+      <img src="assets/logo1.png" alt="Agrilink Logo">
+    </div>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li>
+          <a 
+            [routerLink]="'/admin/dashboard'" 
+            class="nav-item" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}">
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a 
+            [routerLink]="'/admin/posts'" 
+            class="nav-item" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}">
+            Posts
+          </a>
+        </li>
+        <li>
+          <a 
+            [routerLink]="'/admin/notifications'" 
+            class="nav-item" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}">
+            Notifications
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+    <div class="user-profile">
+      <div class="profile-circle">
+        <img src="assets/logo1.png" alt="User Profile">
+      </div>
+    </div>
+  </header>

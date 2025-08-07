@@ -1,0 +1,88 @@
+<app-farmer-sidebar></app-farmer-sidebar>
+<button class="add-post-button" (click)="openAddPostModal()">
+  <i class="fa fa-plus"></i> Add a post
+</button>
+<div class="post-list-container">
+  <!-- Message Aucun post -->
+  
+  
+  <div *ngIf="!posts?.length" class="no-posts">No posts found.</div>
+
+  <!-- Liste des posts -->
+  <div *ngFor="let post of posts" class="post-item">
+    <!-- Boutons d'action en haut à droite -->
+    <div class="post-actions">
+      <button class="edit-button" (click)="editPost(post)">
+        <i class="fa fa-pencil edit-icon"></i>
+      </button>
+      <button class="delete-button" (click)="deletePost(post)">
+        <i class="fa fa-trash delete-icon"></i>
+      </button>
+    </div>
+
+    <!-- Contenu du post -->
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.content }}</p>
+    <p><strong>Posted on :</strong> {{ post.createdAt }}</p>
+
+    <!-- Image du post -->
+    <img *ngIf="post.image" [src]="getImageUrl(post.image)" alt="Image du post" class="post-image" />
+
+    <!-- Icône pour afficher/masquer les commentaires -->
+    <div class="comment-toggle" (click)="toggleComments(post)">
+      <i class="fa" [ngClass]="post.showComments ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      <span>{{ post.showComments ? 'Hide' : 'See' }} comments</span>
+    </div>
+
+    <!-- Commentaires (avec effet de déploiement) -->
+    <div *ngIf="post.showComments">
+      <!-- Zone des commentaires, rendue scrollable si nécessaire -->
+      <div class="comment-list">
+        <div *ngFor="let comment of post.comments" class="comment-item">
+          <p><strong>{{ comment.userName }}:</strong> {{ comment.content }}</p>
+        </div>
+      </div>
+      
+      <!-- Ajouter un commentaire -->
+      <div class="add-comment">
+        <input
+          type="text"
+          [(ngModel)]="post.newCommentContent"
+          placeholder="Add a comment..."
+          aria-label="Add a comment"
+        />
+        <button (click)="addComment(post)" title="Envoyer le commentaire">
+          <i class="fa fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+    
+    
+
+    <!-- Modifier un post -->
+    <!-- Modal d'édition du post -->
+<div *ngIf="post.isEditing" class="modal-overlay" (click)="cancelEdit(post)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h4>Edit the post</h4>
+    <input type="text" [(ngModel)]="post.newTitle" placeholder="New title" />
+    <textarea [(ngModel)]="post.newContent" placeholder="New content"></textarea>
+    <input type="file" (change)="onImageChange($event, post)" />
+    <button (click)="updatePost(post)">Save</button>
+    <button (click)="cancelEdit(post)">Cancel</button>
+  </div>
+</div>
+
+
+
+  </div>
+
+  <div *ngIf="isAddPostModalOpen" class="modal-overlay" (click)="closeAddPostModal()">
+
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeAddPostModal()">&#10005;</button>
+
+      <!-- Intégration du formulaire ici -->
+      <app-post-form></app-post-form>
+    </div>
+  </div>
+</div>

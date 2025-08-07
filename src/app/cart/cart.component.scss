@@ -1,0 +1,335 @@
+.cart {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .cart-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cart-items {
+    margin-bottom: 20px;
+  }
+  
+  .product-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cart-item {
+    position: relative; /* Permet de positionner l'icône de trash en haut à droite */
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-left: 5px solid #388e3c;
+    border-radius: 8px;
+  }
+  
+  .product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .item-details {
+    flex: 1;
+    margin-left: 15px;
+  }
+  
+  .quantity-control button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .total-price {
+    font-weight: bold;
+  }
+  
+  .empty-state {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #777;
+  }
+  
+  .empty-state i {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .order-options {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .regular-order-options {
+    margin-bottom: 20px;
+  }
+  
+  .regular-order-details {
+    margin-top: 10px;
+  }
+  
+  .regular-order-details select,
+  .regular-order-details input {
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .cart-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .btn-validate {
+    padding: 8px 15px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-validate:hover {
+    background-color: #1976d2;
+  }
+  .cart-layout {
+    display: flex; /* Utilise Flexbox pour la disposition en colonnes */
+    gap: 20px; /* Espace entre les colonnes */
+  }
+  
+  .cart-items {
+    flex: 2; /* La section des articles occupe plus d'espace */
+  }
+  
+  .order-summary {
+     padding-left: 20px;
+    // background-color: #ffffff;
+    border-radius: 8px;
+    // border: 1px solid #ddd;
+    // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-options h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #388e3c;
+    border-bottom: 2px solid #e8f5e9;
+    padding-bottom: 5px;
+  }
+  
+  .order-options label {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .order-options input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .regular-order-details {
+    margin-top: 15px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .regular-order-details label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .regular-order-details select,
+  .regular-order-details input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .regular-order-details select:focus,
+  .regular-order-details input:focus {
+    outline: none;
+    border-color: #388e3c;
+    box-shadow: 0 0 5px rgba(56, 142, 60, 0.5);
+  }
+  
+  .order-options h4 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #444;
+  }
+  
+  .cart-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .btn-validate {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: #388e3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn-validate:hover {
+    background-color: #2e7d32;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-validate:active {
+    background-color: #256b27;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .item-details {
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    gap:40px;
+    // border: 1px solid #e0e0e0;
+    // border-radius: 8px;
+    // background-color: #ffffff;
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+
+  .total-price {
+    font-size: 1.1rem;
+    color: #44aa00;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .total-price i {
+    margin-right: 8px;
+    color: #44aa00;
+  }
+  
+  .regular-order-details label {
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .regular-order-details label i {
+    margin-right: 8px;
+    color: #388e3c;
+  }
+  
+  .regular-order-details select, .regular-order-details input {
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 200px;
+  }
+  
+//   .cart-item {
+//     position: relative; /* Permet de positionner l'icône de trash en haut à droite */
+//     padding: 10px;
+//     border: 1px solid #ddd;
+//     border-radius: 8px;
+//     margin-bottom: 15px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//   }
+  .regular-order-details select:focus, .regular-order-details input:focus {
+    border-color: #4caf50;
+  }
+  
+  .regular-order-details select {
+    background-color: #f9f9f9;
+  }
+  
+  .regular-order-details input {
+    background-color: #fff;
+  }
+  
+  .item-details .product-name i,
+.item-details .product-price i {
+  margin-right: 5px; /* Espacement entre l'icône et le texte */
+  color: #388e3c; /* Couleur verte pour les icônes */
+  font-size: 1.2rem; /* Taille des icônes */
+}
+
+.item-details .quantity-control button i {
+  font-size: 1rem; /* Taille des icônes dans les boutons */
+  color: #44aa00; /* Couleur bleue pour les icônes dans les boutons */
+  margin-right: 5px; /* Espacement à droite de l'icône */
+}
+
+.item-details .quantity-control span {
+  font-size: 1rem;
+  color: #555; /* Couleur du texte pour la quantité */
+}
+
+.item-details .quantity-control button {
+  background-color: #f1f8e9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.item-details .quantity-control button:hover {
+  background-color: #e8f5e9;
+}
+
+.trash-btn {
+    position: absolute; /* Positionne l'icône en haut à droite */
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #f44336; /* Couleur rouge pour l'icône */
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .trash-btn:hover {
+    color: #d32f2f; /* Couleur plus foncée au survol */
+  }
+  
+  .trash-btn i {
+    margin: 0; /* Pas d'espace supplémentaire autour de l'icône */
+  }

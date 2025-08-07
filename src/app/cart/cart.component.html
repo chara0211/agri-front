@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<app-client-sidebar></app-client-sidebar>
+<div class="cart">
+  <h2>My Cart</h2>
+
+  <div class="cart-layout">
+    <!-- Section des articles du panier -->
+    <div class="cart-items">
+      <div *ngIf="cartItems.length === 0" class="empty-state">
+        <i class="material-icons">shopping_cart</i>
+        <p>Your cart is empty</p>
+      </div>
+
+      <div *ngIf="cartItems.length > 0">
+        <ul class="product-list">
+          <li *ngFor="let item of cartItems">
+            <div class="cart-item">
+              <img [src]="getImageUrl(item.product.image)" alt="{{ item.product.name }}" class="product-image" />
+              
+              <div class="item-details">
+                <div class="product-info">
+                  <p class="product-name">
+                    <i class="fas fa-cube"></i> {{ item.product.name }}
+                  </p>
+                  <p class="product-price">
+                    <i class="fas fa-dollar-sign"></i>{{ item.product.price }}   
+                  </p>
+                </div>
+                
+                <div class="quantity-control">
+                  <button class="quantity-btn decrement" (click)="decrementQuantity(item)">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <span class="quantity">{{ item.quantity }}</span>
+                  <button class="quantity-btn increment" (click)="incrementQuantity(item)">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+      
+              <p class="total-price">
+                <i class="fas fa-tag"></i> {{ item.quantity * item.product.price }} $
+              </p>
+              
+              <!-- Icone de suppression (Trash) -->
+              <button class="trash-btn" (click)="removeItem(item)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+
+    <!-- Section des options de commande régulière et validation -->
+    <div *ngIf="cartItems.length > 0" class="order-summary">
+      <div class="order-options">
+        <div class="regular-order-options">
+          <h3>Regular order</h3>
+          <label>
+            <input type="checkbox" [(ngModel)]="isRegular" />
+            Make this order regular
+          </label>
+
+          <div *ngIf="isRegular" class="regular-order-details">
+            <label for="regularityType">
+              <i class="fas fa-calendar-day"></i> Frequency :
+            </label>
+            <select id="regularityType" [(ngModel)]="regularityType">
+              <option value="daily"> Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly"> Monthly</option>
+            </select>
+          
+            <label for="interval">
+              <i class="fas fa-sync-alt"></i> Interval :
+            </label>
+            <input type="number" id="interval" [(ngModel)]="interval" min="1" />
+          </div>
+          
+        </div>
+
+        <h4>
+          <i class="fas fa-shopping-cart"></i> Cart total :
+        </h4>
+        <h4>{{ getTotalPrice() }} $</h4>
+        
+        <div class="cart-actions">
+          <button class="btn-validate" (click)="validateCart()">
+            <i class="fas fa-check"></i> Validate
+          </button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

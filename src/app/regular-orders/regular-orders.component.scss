@@ -1,0 +1,169 @@
+.table-wrapper {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 12px;
+    text-align: left;
+    font-size: 0.95rem;
+  }
+  
+  .orders-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .orders-table tbody tr {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    &:not(:last-child) {
+      border-bottom: 2px solid #ddd;
+    }
+  }
+  
+  .status-badge {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: black;
+    text-transform: capitalize;
+  }
+  
+  .status-badge.validated {
+    background-color: #4caf50;
+  }
+  
+  .status-badge.pending {
+    background-color: #ffc107;
+  }
+  
+  .status-badge.cancelled {
+    background-color: #f44336;
+  }
+  
+  .status-badge.completed {
+    background-color: #28a745;
+  }.client-info {
+    background-color: #f1f8e9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dce775;
+    font-size: 1rem;
+    color: #388e3c;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .client-info .vip-star {
+    color: #fbc02d;
+    font-size: 1.5rem;
+    margin-left: 8px;
+  }
+  
+  .client-info .vip-badge {
+    background-color: #4caf50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .client-info .vip-badge i {
+    margin-right: 5px;
+  }
+  
+  .orders-table td i {
+    margin-right: 5px; /* Space between icon and text */
+  }
+  
+  .status-badge i {
+    margin-right: 5px;
+  }
+  
+  .orders-table tbody tr.vip-client {
+    background-color: #e8f5e9;
+  }
+  
+  .orders-table tbody tr.vip-client:hover {
+    background-color: #c8e6c9;
+  }
+  
+  .product-list li {
+    background-color: #e8f5e9;
+    border-left: 5px solid #388e3c;
+    padding-left: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .empty-state i {
+    color: #f44336;
+    margin-right: 8px;
+  }
+  
+  .product-list li {
+    background-color: #e8f5e9; /* Lighter background for product list */
+    border-left: 5px solid #388e3c; /* Adding green left border to make products look special */
+    padding-left: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .product-list li {
+    margin-bottom: 10px;
+    background-color: #f0f4f7;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .btn-validate {
+    padding: 8px 15px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-validate:hover {
+    background-color: #1976d2;
+  }
+  
+  .validated-order-badge {
+    padding: 5px 12px;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border-radius: 12px;
+  }
+  
+  .empty-state {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #777;
+  }
+  
+  .empty-state i {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 10px;
+  }
+  

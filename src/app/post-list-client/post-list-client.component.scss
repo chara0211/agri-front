@@ -1,0 +1,575 @@
+.header {
+    background-color: #2d3c2f; /* Fond vert foncé */
+    padding: 10px 20px;
+    font-family: 'Century Gothic', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between; /* Sépare le logo et les liens */
+    align-items: center;
+  
+    .logo {
+      display: flex;
+      align-items: center;
+  
+      img {
+        width: 50px; /* Ajustez la taille du logo */
+        height: auto;
+      }
+    }
+  
+    .nav {
+      display: flex;
+  
+      .nav-list {
+        display: flex;
+        gap: 40px; /* Espacement entre les liens */
+        list-style: none; /* Supprime les puces */
+        margin: 0;
+        padding: 0;
+  
+        .nav-item {
+          text-decoration: none;
+          color: white;
+          font-weight: 400;
+          font-size: 1rem;
+          transition: color 0.3s ease;
+          position: relative;
+  
+          &:hover {
+            color: #d9b44a; /* Couleur jaune/or au survol */
+          }
+  
+          &.active {
+            font-weight: 700;
+            color: #d9b44a;
+  
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -5px;
+              left: 0;
+              width: 100%;
+              height: 3px;
+              background: #d9b44a;
+            }
+          }
+        }
+      }
+    }
+  
+    .user-profile {
+      display: flex;
+      align-items: center;
+  
+      .profile-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%; /* Cercle parfait */
+        overflow: hidden;
+        border: 2px solid #d9b44a; /* Bordure jaune/or */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+  
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* L'image remplit le cercle */
+        }
+      }
+    }
+  }
+
+  /* Conteneur principal */
+/* Conteneur principal */
+.post-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 50px 20px; /* Espacement vertical de 20px, pas d'espacement horizontal */
+  padding: 20px;
+  font-family: 'Playfair Display', serif;
+}
+
+
+/* Chaque carte */
+.post-item {
+  position: relative; /* Nécessaire pour placer des éléments fixes */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espace entre les éléments */
+  background-color: #fff;
+  border: 1px solid #d9b44a;
+  border-radius: 8px;
+  padding: 15px;
+  // margin-right:10px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 100%; /* Prend toute la hauteur disponible */
+
+}
+
+/* Titre */
+.post-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Contenu */
+.post-item p {
+  font-size: 14px;
+  color: #555;
+  margin: 10px 0;
+}
+
+/* Image */
+.post-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Icône pour afficher/masquer les commentaires */
+.toggle-comments-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Conteneur des commentaires */
+.comments-container {
+  margin-top: 10px;
+  display: none;
+}
+
+/* Zone d'ajout de commentaires */
+.add-comment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto; /* Force cet élément à se placer en bas */
+}
+
+.add-comment input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.add-comment button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-comment button:hover {
+  background-color: #218838;
+}
+
+/* Boutons d'action (Modifier et Supprimer) */
+.post-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  color: #ffc107; /* Couleur pour l'édition */
+  font-size: 18px;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  color: #dc3545; /* Couleur pour la suppression */
+  font-size: 18px;
+}
+
+/* Icônes de modification et suppression */
+.edit-icon,
+.delete-icon {
+  font-size: 18px;
+}
+
+.edit-icon:hover {
+  color: #ffc107;
+}
+
+.delete-icon:hover {
+  color: #dc3545;
+}
+
+.comment-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+  width: fit-content;
+
+  &:hover {
+    background-color: #e2e6ea;
+    transform: scale(1.05);
+  }
+
+  i {
+    margin-right: 8px;
+    font-size: 18px;
+    color: #2d3c2f;  // Couleur de l'icône
+    transition: transform 0.3s ease;
+  }
+
+  span {
+    color: #2d3c2f;  // Couleur du texte
+    font-size: 14px;
+  }
+
+  // Changer la couleur de l'icône et du texte quand les commentaires sont visibles
+  &.active {
+    i {
+      color: #2d3c2f;  // Vert pour indiquer que les commentaires sont visibles
+      transform: rotate(180deg);  // Rotation de l'icône
+    }
+
+    span {
+      color: #2d3c2f;  // Vert pour le texte
+    }
+  }
+}
+.comment-list {
+  max-height: 150px; /* Limite la hauteur des commentaires à 200px, ajuste si nécessaire */
+  overflow-y: auto; /* Ajoute la possibilité de défiler verticalement si la zone est trop petite */
+  padding-right: 10px; /* Ajoute un peu d'espace pour les barres de défilement */
+  margin-bottom: 10px; /* Espace entre les commentaires et le champ d'ajout */
+}
+.comment-list::-webkit-scrollbar {
+  width: 0; /* Masque la barre de défilement verticale */
+  height: 0; /* Masque la barre de défilement horizontale si présente */
+}
+/* Conteneur des commentaires */
+.comment-item {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  border-left: 5px solid #d9b44a;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e7f1ff;
+  }
+
+  p {
+    margin: 0;
+    font-weight: normal;
+  }
+
+  strong {
+    font-weight: 600;
+    color: #3d413e;
+  }
+}
+
+/* Section pour ajouter un commentaire */
+.add-comment {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+
+  input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-right: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #28a745;
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  button {
+    background-color: #4caf50;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: #28a745;
+      transform: scale(1.1);
+    }
+
+    i {
+      font-size: 18px;
+    }
+  }
+}
+
+/* Overlay pour le modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond sombre transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenu du modal */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content input,
+.modal-content textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  // width: 100%;
+}
+
+.modal-content button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.modal-content button:first-child {
+  background-color: #ff2600;
+  color: white;
+}
+
+.modal-content button:first-child:hover {
+  background-color: #ce0909;
+}
+
+.modal-content button:last-child {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-content button:last-child:hover {
+  background-color: #d32f2f;
+}
+
+/* Animation d'apparition du modal */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* Style pour le bouton de fermeture */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.close-modal:hover {
+  color: red;  /* Changer la couleur au survol */
+}
+/* Bouton Ajouter un Post */
+.add-post-button {
+  background-color: #4caf50; /* Couleur de fond bleu */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  display: flex;
+  align-items: center; /* Aligne l'icône et le texte */
+  gap: 10px; /* Espacement entre l'icône et le texte */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-post-button:hover {
+  background-color: #44aa00; /* Couleur de fond au survol */
+  transform: scale(1.05); /* Légère animation d'agrandissement */
+}
+
+.add-post-button i {
+  font-size: 18px; /* Taille de l'icône */
+}
+
+/* Effet au survol de l'icône */
+.add-post-button:hover i {
+  transform: translateX(5px); /* Déplace l'icône légèrement à droite */
+}
+
+.user-link {
+    text-decoration: none; /* Supprimer la soulignure par défaut */
+    color: #03421d; /* Couleur bleue élégante pour le texte */
+    font-weight: 600; /* Poids de police pour le texte */
+    font-size: 1.2rem; /* Taille de police modérée */
+    position: relative; /* Pour pouvoir positionner l'élément "See Products" */
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    overflow: hidden; /* Cacher le texte du message jusqu'à l'effet */
+    width: 150px; /* Largeur fixe */
+    // text-align: center; /* Centrer le texte */
+    white-space: nowrap; /* Empêche le retour à la ligne */
+  }
+  
+  .user-name {
+    display: inline-block; /* Faire en sorte que le nom de l'utilisateur reste sur la même ligne */
+  }
+  
+  .see-products {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4caf50; /* Fond bleu */
+    color: #ffffff; /* Texte blanc pour le message */
+    font-size: 1rem;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Commence invisible */
+    visibility: hidden; /* Le message est caché au départ */
+    transform: translateY(100%); /* Position en bas du lien */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s; /* Transition fluide */
+  }
+  
+  .user-link:hover .see-products {
+    opacity: 1; /* Rendre visible le message */
+    visibility: visible; /* Le message devient visible */
+    transform: translateY(0); /* Le message glisse vers le haut */
+    transition-delay: 0s; /* L'effet commence immédiatement */
+  }
+  
+  .user-link:hover .user-name {
+    opacity: 0; /* Le nom de l'utilisateur disparaît au survol */
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+
+    .profile-circle {
+      width: 40px;
+      height: 50px;
+      border-radius: 50%; /* Cercle parfait */
+      overflow: hidden;
+    //   border: 2px solid #d9b44a; /* Bordure jaune/or */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    background-color: white;
+
+      img {
+       
+        object-fit: cover; /* L'image remplit le cercle */
+      }
+    }
+  }
+
+  .user-profile-container {
+    display: flex;
+    align-items: center; /* Aligne les éléments verticalement au centre */
+    gap: 10px; /* Espacement entre l'avatar et le lien */
+    padding: 10px 0; /* Espacement vertical */
+    border-bottom: 1px solid #d9b44a; /* Ligne grise très claire en dessous */
+  }
+  
+  .search-bar {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 250px;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  
+    &::placeholder {
+      color: #aaa;
+      font-style: italic;
+    }
+  
+    &:focus {
+      border-color: #d9b44a;
+    }
+  }
+  

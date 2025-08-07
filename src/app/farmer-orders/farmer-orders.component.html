@@ -1,0 +1,118 @@
+<app-farmer-sidebar></app-farmer-sidebar>
+
+<div class="dashboard-orders">
+    <h1 class="dashboard-title">
+      <i class="fas fa-clipboard-list"></i> Customer Orders
+    </h1>
+  
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success">
+      <i class="fas fa-check-circle"></i> {{ successMessage }}
+    </div>
+  
+    <!-- Filters Section -->
+    <!-- Filters Section -->
+<div class="filters">
+    <div class="filter-item">
+      <label for="clientName" class="filter-label">Filter by client name</label>
+      <input
+        id="clientName"
+        type="text"
+        [(ngModel)]="clientNameFilter"
+        placeholder="Search by client name..."
+        (input)="applyFilters()"
+        class="filter-input"
+      />
+    </div>
+  
+    <div class="filter-item">
+      <label for="status" class="filter-label">Filter by status</label>
+      <select [(ngModel)]="statusFilter" (change)="applyFilters()" id="status" class="filter-select">
+        <option value="">Select status</option>
+        <option value="completed">Completed</option>
+        <option value="pending">Pending</option>
+      </select>
+    </div>
+  
+    <div class="filter-item">
+      <label for="regularity" class="filter-label">Filter by regularity</label>
+      <select [(ngModel)]="regularityFilter" (change)="applyFilters()" id="regularity" class="filter-select">
+        <option value="">Select regularity</option>
+        <option value="true">Regular</option>
+        <option value="false">Not Regular</option>
+      </select>
+    </div>
+  </div>
+  
+  
+    <div *ngIf="orders.length > 0; else noOrders">
+      <!-- Orders Table -->
+      <div class="orders-table">
+        <table>
+          <thead>
+            <tr>
+              <th><i class="fas fa-hashtag"></i> ID</th>
+              <th><i class="fas fa-user"></i> Client</th>
+              <th><i class="fas fa-coins"></i> Total</th>
+              <th><i class="fas fa-box"></i> Articles</th>
+              <th><i class="fas fa-info-circle"></i> Status</th>
+              <th><i class="fas fa-sync-alt"></i> Regular</th>
+              <th><i class="fas fa-cogs"></i> Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of filteredOrders; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <div class="client-info">
+                  <p><strong>Name:</strong> {{ order.user.name }}</p>
+                  <p><strong>Email:</strong> {{ order.user.email }}</p>
+                </div>
+              </td>
+              <td>{{ order.total_amount | currency }}</td>
+              <td>
+                <div class="articles-list">
+                  <ul>
+                    <li *ngFor="let item of order.order_items">
+                      <span class="product-name">{{ item.product.name }}</span>
+                      <div class="quantity">
+                        <i class="fas fa-cogs"></i>
+                        <span>{{ item.quantity }}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <span class="status-badge {{ order.status.toLowerCase() }}">
+                  <i *ngIf="order.status === 'validated'" class="fas fa-check"></i>
+                  {{ order.status }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="order.isRegular" class="badge regular">
+                  <i class="fas fa-check-circle"></i> Yes
+                </span>
+                <span *ngIf="!order.isRegular" class="badge not-regular">
+                  <i class="fas fa-times-circle"></i> No
+                </span>
+              </td>
+              <td>
+                <button *ngIf="order.status !== 'validated'" class="btn-validate" (click)="validateOrder(order.id)">
+                  <i class="fas fa-check"></i> Validate
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <ng-template #noOrders>
+      <div class="empty-state">
+        <i class="fas fa-box-open"></i>
+        <p>No orders found for this farmer.</p>
+      </div>
+    </ng-template>
+  </div>
+  

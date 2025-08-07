@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<app-client-sidebar></app-client-sidebar>
+<div class="user-products">
+
+  <!-- Vérification s'il n'y a pas de produits -->
+  <div *ngIf="products && products.length === 0" class="no-products">
+    No posts found for this user.
+  </div>
+
+  <!-- Liste des produits sous forme de cartes -->
+  <div class="product-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <div class="product-container">
+        <img 
+          *ngIf="product.image" 
+          [src]="'http://localhost:8000/storage/' + product.image" 
+          alt="{{ product.name }}" 
+          class="product-image">
+
+        <!-- Badge avec style et icône selon le statut -->
+        <span 
+          class="product-status" 
+          [ngClass]="{
+            'available': product.status === 'Available',
+            'low-stock': product.status === 'Low Stock',
+            'out-of-stock': product.status === 'Out of Stock'
+          }">
+          <i 
+            [ngClass]="{
+              'fa fa-check-circle': product.status === 'Available',
+              'fas fa-hourglass-half': product.status === 'Low Stock',
+              'fas fa-times-circle': product.status === 'Out of Stock'
+            }"
+            aria-hidden="true">
+          </i>
+          {{ product.status }}
+        </span>
+
+        <span *ngIf="!product.image" class="no-image">No Image</span>
+      </div>
+      <div class="product-details">
+        <h4 class="product-name">
+          <i class="fas fa-tag"></i> {{ product.name }}
+        </h4>
+                <p class="product-description">{{ product.description }}</p>
+
+                <p class="product-price">
+                  <i class="fas fa-dollar-sign"></i> {{ product.price}}
+                </p>
+                <button class="add-to-cart-btn" (click)="addToCart(product)">
+                  <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
+      </div>
+    </div>
+  </div>
+</div>

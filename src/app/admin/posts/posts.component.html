@@ -1,0 +1,59 @@
+<app-admin-sidebar></app-admin-sidebar>
+<p class="page-title">Manage Posts</p>
+
+<!-- Search Bar with Icon -->
+<div class="search-bar">
+  <i class="fas fa-search search-icon"></i>
+  <input 
+    type="text" 
+    [(ngModel)]="searchQuery" 
+    (input)="filterPosts()" 
+    placeholder="Search by user or title" 
+    class="search-input"
+  />
+</div>
+
+<div class="posts-container">
+  <div *ngFor="let post of filteredPosts" class="post-card">
+    <div class="post-header">
+      <h2>{{ post.title }}</h2>
+      <div class="post-meta">
+        <span class="author">By: {{ post.userName }}</span>
+        <button class="delete-btn" (click)="deletePost(post)">
+          <i class="fas fa-trash-alt"></i> 
+        </button>
+      </div>
+    </div>
+
+    <div class="post-content">
+      <p>{{ post.content }}</p>
+      <img *ngIf="post.image" [src]="getImageUrl(post.image)" alt="Post Image" class="post-image">
+    </div>
+
+    <div class="comment-toggle">
+      <button class="toggle-comments-btn" (click)="toggleComments(post)">
+        <i class="fas fa-comments"></i> View Comments
+      </button>
+    </div>
+
+    <div *ngIf="post.showComments" class="comments-section">
+      <div class="all-comments">
+        <div *ngFor="let comment of post.comments" class="comment-card">
+          <p>
+            <strong>{{ comment.userName }}:</strong> {{ comment.content }}
+          </p>
+          <button class="delete-comment-btn" (click)="deleteComment(post, comment)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="add-comment">
+        <textarea [(ngModel)]="post.newCommentContent" placeholder="Add a comment"></textarea>
+        <button class="add-comment-btn" (click)="addComment(post)">
+          <i class="fas fa-plus-circle"></i> Add Comment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

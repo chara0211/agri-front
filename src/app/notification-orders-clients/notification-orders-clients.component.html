@@ -1,0 +1,18 @@
+
+<app-client-sidebar></app-client-sidebar>
+
+<div class="notifications-container">
+  <div *ngFor="let notification of notifications" class="notification-card">
+    <div class="notification-header">
+      <i class="fas fa-bell"></i>
+      <h3>Your order #{{ notification.data.order_id }} has been confirmed!</h3>
+    </div>
+    <p><strong>Total amount:</strong> {{ notification.data.total_amount | currency }}</p>
+    <p><strong>Confirmed on:</strong> {{ notification.created_at | date:'long' }}</p>
+
+    <!-- Afficher un bouton "Marquer comme lu" si la notification n'est pas lue -->
+    <button *ngIf="!notification.read_at" (click)="markAsRead(notification.id)">
+      <i class="fas fa-check-circle"></i >Mark as read
+    </button>
+  </div>
+</div>
